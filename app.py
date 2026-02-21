@@ -359,11 +359,31 @@ def generate_content(news_bundle):
     
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     
-    user_message = (
-        "You will receive a bundle of news items from the last 24 hours.\n"
-        f"{news_bundle}\n\n"
-        "Follow the output format exactly."
-    )
+  user_message = (
+    "You will receive a bundle of news items from the last 24 hours.\n"
+    "- Each item has a title, summary, and link.\n"
+    "- They cover AI, automation, startups, and small or medium businesses.\n"
+    "- The bundle may also include a short note like 'Lesson I learned today' from Miss AI.\n\n"
+    "Your job:\n"
+    "1) Scan ALL items and group them into topics and themes.\n"
+    "2) Use frequency (how many articles mention a theme) as a proxy for importance.\n"
+    "3) For EVERY post you write, explicitly anchor it to one or more current news items from the bundle.\n"
+    "   - The long post should clearly name the key news event or shift.\n"
+    "   - The short posts should still reference what is happening now, not generic timeless advice.\n"
+    "4) Choose themes for:\n"
+    "   - One long news and opinion post.\n"
+    "   - One funny or meme adjacent short post.\n"
+    "   - One very practical SMB play short post.\n"
+    "   - One life lesson and mindset short post from Miss AI.\n"
+    "   - One juicy, controversial poll.\n"
+    "5) Make sure everything is written in Miss AI voice as defined in the system prompt.\n"
+    "6) Optimise every post for high engagement and virality while staying honest and useful.\n"
+    "7) Generate the X content package only around those chosen themes.\n\n"
+    "Here is the news bundle and any daily lesson info:\n\n"
+    f"{news_bundle}\n\n"
+    "Follow the output format exactly."
+)
+
     
     progress_bar = st.progress(0)
     status_text = st.empty()
@@ -476,6 +496,7 @@ st.markdown("---")
 st.markdown('<div style="text-align: center; color: rgba(255,255,255,0.7); font-size: 0.9rem;">Powered by Claude • Built with Streamlit</div>', unsafe_allow_html=True)
 
 # Copy SYSTEM_PROMPT from original main.py into this file at the top.
+
 
 
 
